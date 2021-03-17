@@ -90,10 +90,12 @@ export function activate(context: ExtensionContext) {
             <div class='container'>
                 <textarea id="NodeData">${nodeData.toString()}</textarea>
                 <button id="Save">Save</button>
+                <button id="Parse">JsonPretty</button>
             </div>
             <script>
                 const vscode = acquireVsCodeApi();
-                const saveBtn = document.querySelector('#Save');
+                const saveBtn = document.querySelector('#Save');;
+                const prettyJson = document.querySelector('#Parse');
 
                 saveBtn.addEventListener('click', (e) => {
                     const nodeData = document.querySelector('#NodeData').value;
@@ -103,6 +105,12 @@ export function activate(context: ExtensionContext) {
                         arguments: [nodeData, path]
                     });
                 });
+
+                prettyJson.addEventListener('click', (e) => {
+                    const d = document.querySelector('#NodeData').value
+                    document.querySelector('#NodeData').value = JSON.stringify(JSON.parse(d), null, "\t");
+                });
+
             </script>
         </body>
         </html>`;
